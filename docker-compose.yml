@@ -6,6 +6,8 @@ services:
     container_name: nginx-reverse-proxy
     volumes:
       - ./nginx-reverse-proxy/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx-reverse-proxy/etc/ssl/certs:/etc/ssl/certs
+      - ./nginx-reverse-proxy//etc/ssl/private:/etc/ssl/private
     networks:
       - vps
     ports:
