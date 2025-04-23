@@ -1,15 +1,11 @@
 # Stage 1: Build the application
-FROM eclipse-temurin:21-jdk-alpine
-RUN apk update && apk add --no-cache \
+FROM eclipse-temurin:21-jdk-jammy
+RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     unzip \
     tar \
-    certbot \
-    openssl \
-    curl \
-    bash \
-    py3-pip \
-    ca-certificates
+    bash && \
+    rm -rf /var/lib/apt/lists/*
 # Set the working directory
 WORKDIR /bootoolz
 COPY . .
