@@ -53,3 +53,4 @@ application.properties
 application.yml
 
 drafts.md
+/.env
