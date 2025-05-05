@@ -53,4 +53,7 @@ application.properties
 application.yml
 
 drafts.md
-/.env
+.env
+
+nginx-reverse-proxy/certbot
+nginx-reverse-proxy/conf.d

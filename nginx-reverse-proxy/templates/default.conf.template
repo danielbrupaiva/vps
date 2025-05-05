@@ -1,0 +1,10 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name localhost ${PUBLIC_HOSTNAME} www.${PUBLIC_HOSTNAME};   # Define the domains
+    
+    # Handle ACME challenge for Certbot
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+}
