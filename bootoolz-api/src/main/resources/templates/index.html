@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootoolz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>bootoolz</title>
     <style>
         body {
             margin: 0;
@@ -28,7 +28,7 @@
 </head>
 <body>
     <div>
-        <img src="./assets/preview.png" alt="bootoolz_logo" style="width: auto; height: auto;">
+        <img th:src="@{assets/preview.png}" alt="bootoolz_logo" style="width: auto; height: auto;">
     </div>
 </body>
 </html>
