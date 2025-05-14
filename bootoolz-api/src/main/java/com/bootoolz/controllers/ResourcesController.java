@@ -1,12 +1,13 @@
 package com.bootoolz.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import com.bootoolz.entities.Message;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ResourcesController {
-    @GetMapping("/resources")
-    public String Resources() {
-        return "resources";
+    @RequestMapping("/resources")
+    public Message getResources() {
+        return new Message("resources");
     }
 }
