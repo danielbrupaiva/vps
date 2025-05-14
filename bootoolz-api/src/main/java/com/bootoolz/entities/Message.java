@@ -11,7 +11,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Message {
-    private UUID uuid = UUID.randomUUID();;
+    private UUID uuid = UUID.randomUUID();
     private LocalDateTime timestamp = LocalDateTime.now(ZoneOffset.UTC);
     @Getter @Setter
     private String text;
