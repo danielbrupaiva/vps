@@ -23,15 +23,15 @@ public class WebSecurityConfiguration {
     private String rootPassword;
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    public PasswordEncoder bcryptEngine() {
+        return new BCryptPasswordEncoder(12);
     }
 
     @Bean
     public InMemoryUserDetailsManager userDetailsManager() {
         return new InMemoryUserDetailsManager(
                 User.withUsername("root")
-                        .password(rootPassword)
+                        .password(bcryptEngine().encode(rootPassword))
                         .authorities("ROLE_ADMIN")
                         .build()
         );
