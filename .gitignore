@@ -57,3 +57,5 @@ drafts.md
 
 nginx-reverse-proxy/certbot
 nginx-reverse-proxy/conf.d
+
+mongodb/data/*

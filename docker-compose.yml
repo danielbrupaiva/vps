@@ -43,7 +43,36 @@ services:
     restart: no
     tty: true
     stdin_open: true
-    
+
+  mongodb:
+    image: mongo:latest
+    restart: unless-stopped
+    networks:
+      - vps
+    ports:
+      - ${MONGODB_PORT}:${MONGODB_PORT}
+    volumes:
+      - ./mongodb/data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
+
+  mongo-express:
+    image: mongo-express:latest
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+    networks:
+      - vps
+    ports:
+      - ${ME_PORT}:${ME_PORT}
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: ${ME_CONFIG_BASICAUTH_USERNAME}
+      ME_CONFIG_BASICAUTH_PASSWORD: ${ME_CONFIG_BASICAUTH_PASSWORD}
+      ME_CONFIG_MONGODB_PORT: ${MONGODB_PORT}
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGODB_USERNAME}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGODB_PASSWORD}
+
 networks:
   vps:
     driver: bridge
