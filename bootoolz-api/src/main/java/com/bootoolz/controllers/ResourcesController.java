@@ -1,7 +1,7 @@
 package com.bootoolz.controllers;
 
 import com.bootoolz.entities.Message;
-import com.bootoolz.exceptions.NotImplement;
+import com.bootoolz.exceptions.NotImplemented;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +16,6 @@ public class ResourcesController {
 
     @GetMapping("/api/users")
     public ResponseEntity<Object> getUsers() {
-        throw new NotImplement("Not implemented yet");
+        throw new NotImplemented("Not implemented yet");
     }
 }
