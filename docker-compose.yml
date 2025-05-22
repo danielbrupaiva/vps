@@ -45,6 +45,7 @@ services:
     stdin_open: true
 
   mongodb:
+    container_name: ${MONGODB_HOST}
     image: mongo:latest
     restart: unless-stopped
     networks:
@@ -53,11 +54,11 @@ services:
       - ${MONGODB_PORT}:${MONGODB_PORT}
     volumes:
       - ./mongodb/data:/data/db
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
+    env_file:
+      - .env  
 
   mongo-express:
+    container_name: ${ME_HOST}
     image: mongo-express:latest
     depends_on:
       - mongodb
@@ -66,12 +67,8 @@ services:
       - vps
     ports:
       - ${ME_PORT}:${ME_PORT}
-    environment:
-      ME_CONFIG_BASICAUTH_USERNAME: ${ME_CONFIG_BASICAUTH_USERNAME}
-      ME_CONFIG_BASICAUTH_PASSWORD: ${ME_CONFIG_BASICAUTH_PASSWORD}
-      ME_CONFIG_MONGODB_PORT: ${MONGODB_PORT}
-      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGODB_USERNAME}
-      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGODB_PASSWORD}
+    env_file:
+      - .env
 
 networks:
   vps:
