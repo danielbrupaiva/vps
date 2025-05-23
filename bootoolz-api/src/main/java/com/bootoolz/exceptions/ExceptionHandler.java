@@ -13,27 +13,24 @@ import java.util.Map;
 @ControllerAdvice
 public class ExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
-    public ResponseEntity<Object> exceptionHandler (Exception exception, WebRequest request) {
+    private ResponseEntity<Object> buildResponseEntity(Exception ex, WebRequest request, HttpStatus status) {
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
-        body.put("error", "Internal Server Error");
-        body.put("message", exception.getMessage());
+        body.put("status", status.value());
+        body.put("error", status.getReasonPhrase());
+        body.put("message", ex.getMessage());
         body.put("path", request.getDescription(false).replace("uri=", ""));
 
-        return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(body, status);
+    }
+
+    @org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
+    public ResponseEntity<Object> exceptionHandler (Exception exception, WebRequest request) {
+        return buildResponseEntity(exception, request, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Object> runtimeExceptionHandler (RuntimeException exception, WebRequest request) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
-        body.put("error", "Internal Server Error");
-        body.put("message", exception.getMessage());
-        body.put("path", request.getDescription(false).replace("uri=", ""));
-
-        return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+        return buildResponseEntity(exception, request, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
