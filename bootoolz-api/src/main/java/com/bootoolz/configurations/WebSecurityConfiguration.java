@@ -19,7 +19,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 public class WebSecurityConfiguration {
 
-    @Value("${ROOT_PASSWORD}")
+    @Value("${API_ROOT_PASSWORD}")
     private String rootPassword;
 
     @Bean
@@ -31,7 +31,7 @@ public class WebSecurityConfiguration {
     public InMemoryUserDetailsManager userDetailsManager() {
         return new InMemoryUserDetailsManager(
                 User.withUsername("root")
-                        .password(bcryptEngine().encode(rootPassword))
+                        .password(rootPassword)
                         .authorities("ROLE_ADMIN")
                         .build()
         );
