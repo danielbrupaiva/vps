@@ -17,7 +17,10 @@ ssh-copy-id -i /home/$USER/.ssh/id_ed25519.pub USER@REMOTE_IP
 cat /home/$NEW_USER/.ssh/id_ed25519.pub
 ````
 - Git configs
-
+```bash
+sudo git config --system user.name "Your Name"
+sudo git config --system user.email "you@example.com"
+````
 ## Linux
 
 - Create new user at VPS
