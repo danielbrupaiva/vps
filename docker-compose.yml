@@ -1,5 +1,5 @@
 services:
-  bootoolz-api:
+  bootoolz:
     build:
       context: ./bootoolz-api
       dockerfile: Dockerfile
@@ -22,7 +22,7 @@ services:
       dockerfile: Dockerfile
     container_name: nginx-reverse-proxy
     depends_on:
-      - bootoolz-api
+      - bootoolz
     env_file:
       - .env  
     volumes:
