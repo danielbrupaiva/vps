@@ -4,10 +4,20 @@
 - Generate new ssh key pair
 ```bash
 ssh-keygen -t ed25519
+ssh-keygen -t ed25519 -o -a 100 -f ~/.ssh/id_ed25519_secure -C "your_email@example.com"
 ```
 - Send a copy of pub key to target
 ```bash
-ssh-copy-id -i /home/$USER/.ssh/id_ed25519.pub USER@REMOTE_IP
+ssh-copy-id -i /home/$USER/.ssh/id_ed25519_secure.pub USER@REMOTE_IP
+```
+## Firewall
+
+```bash
+apt install ufw
+ufw allow 22/tcp
+ufw allow 80/tcp
+ufw allow 443/tcp
+ufw enable 
 ```
 
 ## Git / Github
