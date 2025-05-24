@@ -49,5 +49,5 @@ Thumbs.db
 spring.log
 
 # Sensitive files
-application.properties
-application.yml
+#application.properties
+#application.yml

@@ -4,18 +4,26 @@ import com.bootoolz.entities.Message;
 import com.bootoolz.exceptions.NotImplemented;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/api")
 public class ResourcesController {
-    @GetMapping("/api/resources")
-    public ResponseEntity<Message> getResources() {
-        return new ResponseEntity<>(new Message("message"), HttpStatus.OK);
+
+    @GetMapping("/")
+    public void getRoot() {
+       throw new NotImplemented("Not implemented yet");
     }
 
-    @GetMapping("/api/users")
-    public ResponseEntity<Object> getUsers() {
+    @GetMapping("/resources")
+    public Message getResources() {
+        return new Message("message");
+    }
+
+    @GetMapping("/users")
+    public void getUsers() {
         throw new NotImplemented("Not implemented yet");
     }
 }

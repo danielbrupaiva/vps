@@ -49,9 +49,6 @@ Thumbs.db
 spring.log
 
 # Sensitive files
-application.properties
-application.yml
-
 drafts.md
 .env
 
@@ -59,3 +56,14 @@ nginx-reverse-proxy/certbot
 nginx-reverse-proxy/conf.d
 
 mongodb/data/*
+.bash_logout
+.bash_history
+.bashrc
+.cache/
+.docker/
+.dotnet/
+.profile
+.ssh/
+.sudo_as_admin_successful
+.vscode-server/
+.wget-hsts

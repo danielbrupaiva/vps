@@ -1,15 +1,29 @@
-# Stage 1: Build the application
-FROM eclipse-temurin:21-jdk-jammy
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl \
-    unzip \
-    tar \
-    bash && \
-    rm -rf /var/lib/apt/lists/*
-# Set the working directory
-WORKDIR /bootoolz
+# -------- Stage 1: Build the application --------
+FROM gradle:8.7.0-jdk21 AS builder
+# Set working directory
+WORKDIR /app
+# Copy only files needed to resolve dependencies
 COPY . .
-# Make sure the script is executable
-RUN chmod +x entrypoint.sh
-# Set the script as the entrypoint
-ENTRYPOINT ["./entrypoint.sh"]
+# Pre-download dependencies (cache layer)
+RUN gradle build -x test --no-daemon || return 0
+# Copy the rest of the project
+COPY . .
+# Build the JAR (skip tests for speed)
+RUN gradle bootJar -x test --no-daemon
+
+# -------- Stage 2: Create a minimal runtime image --------
+FROM eclipse-temurin:21-jre
+
+# Create a non-root user
+RUN useradd -ms /bin/bash spring
+
+WORKDIR /home/spring
+
+# Copy only the generated JAR from builder
+COPY --from=builder /app/build/libs/*.jar app.jar
+
+# Use non-root user
+USER spring
+
+# Run the Spring Boot app
+ENTRYPOINT ["java", "-jar", "app.jar"]
