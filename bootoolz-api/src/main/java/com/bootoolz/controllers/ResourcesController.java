@@ -14,7 +14,7 @@ public class ResourcesController {
 
     @GetMapping("/")
     public Message getRoot() {
-       throw new Message("bootoolz api entry point");
+       return new Message("bootoolz api entry point");
     }
 
     @GetMapping("/resources")
