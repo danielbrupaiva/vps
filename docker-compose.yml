@@ -50,8 +50,8 @@ services:
     restart: unless-stopped
     networks:
       - vps
-    ports:
-      - ${MONGODB_PORT}:${MONGODB_PORT}
+    #ports:
+    #  - ${MONGODB_PORT}:${MONGODB_PORT}
     volumes:
       - ./mongodb/data:/data/db
     env_file:
@@ -65,8 +65,8 @@ services:
     restart: unless-stopped
     networks:
       - vps
-    ports:
-      - ${ME_PORT}:${ME_PORT}
+    #ports:
+    #  - ${ME_PORT}:${ME_PORT}
     env_file:
       - .env
 

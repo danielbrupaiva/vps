@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class ResourcesController {
 
     @GetMapping("/")
-    public void getRoot() {
-       throw new NotImplemented("Not implemented yet");
+    public Message getRoot() {
+       return new Message("bootoolz api entry point");
     }
 
     @GetMapping("/resources")

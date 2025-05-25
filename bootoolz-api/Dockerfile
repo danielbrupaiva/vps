@@ -1,5 +1,5 @@
 # -------- Stage 1: Build the application --------
-FROM gradle:8.7.0-jdk21 AS builder
+FROM gradle:8.10.0-jdk21 AS builder
 # Set working directory
 WORKDIR /app
 # Copy only files needed to resolve dependencies

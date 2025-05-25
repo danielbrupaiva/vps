@@ -4,17 +4,46 @@
 - Generate new ssh key pair
 ```bash
 ssh-keygen -t ed25519
+ssh-keygen -t ed25519 -o -a 100 -f ~/.ssh/id_ed25519_secure -C "your_email@example.com"
 ```
 - Send a copy of pub key to target
 ```bash
-ssh-copy-id -i /home/$USER/.ssh/id_ed25519.pub USER@REMOTE_IP
+ssh-copy-id -i /home/$USER/.ssh/id_ed25519_secure.pub USER@REMOTE_IP
+```
+## Firewall (UFW)
+
+```bash
+apt install ufw
+sudo ufw default deny incoming    # Deny incoming as default
+sudo ufw default allow outgoing   # Allow outgoing as default
+sudo ufw allow 22/tcp             # Allow SSH
+sudo ufw allow 80,443/tcp         # Allow HTTP/HTTPS
+sudo ufw deny 27017               # Block specific PORT, ex. MongoDB
+sudo ufw enable                   # Turn on firewall
+sudo ufw reload                   # Reload Firewall
+sudo ufw status verbose           # Confirm rules
+sudo reboot                       # Reboot (maybe not required, but... SAFER)
+```
+
+## Network audition
+
+### Netstat
+```bash
+sudo netstat ss                   # Check all status
+sudo netstat -tuln | grep 27017
+```
+### Nmap
+From another machine check opened port 
+
+```bash
+nmap -Pn bootoolz.com
 ```
 
 ## Git / Github
 - Add the new public key content at Gihub account setting
 
 ```bash
-cat /home/$NEW_USER/.ssh/id_ed25519.pub
+cat /home/$NEW_USER/.ssh/id_ed25519_secure.pub
 ````
 - Git configs
 ```bash
