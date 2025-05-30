@@ -39,6 +39,18 @@ From another machine check opened port
 nmap -Pn bootoolz.com
 ```
 
+## 
+
+```bash
+sudo apt update
+sudo apt install apache2-utils
+
+# Create htpassword file with root user
+htpasswd -B -C 12 -c .htpasswd root
+# Add new user
+htpasswd -B -C 12 .htpasswd admin
+```
+
 ## Git / Github
 - Add the new public key content at Gihub account setting
 
